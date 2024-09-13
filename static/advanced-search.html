@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Search</title>
+    <link href='https://fonts.googleapis.com/css?family=Platypi' rel='stylesheet'>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: url('img2.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column; 
+        }
+        .tint {
+            position: auto;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        header {
+            background: #000;
+            color: white;
+            padding: 10px 20px;
+            width: 100%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; 
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .logo {
+            height: 50px;
+            width: auto;
+            margin-right: 1px;
+        }
+        .search-container {
+            text-align: center;
+            padding-top: 70px; 
+        }
+        .big-text {
+            font-size: 50px; 
+            font-weight: bold;
+            margin: 20px 0;
+            font-family: 'Platypi';
+                                                
+        }
+        select, input[type="number"], input[type="text"], input[type="radio"], label {
+            padding: 10px;
+            margin: 10px 0;
+            width: 300px;
+            display: block;
+        }
+        input[type="submit"] {
+            cursor: pointer;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            width: 300px; 
+            margin: 10px auto;
+        }
+        .radio-group label {
+            margin-right: 10px; 
+            width: auto; 
+        }
+        footer {
+            background-color: #000000; 
+            color: white; 
+            text-align: center; 
+            padding: 20px 0px; 
+            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-size: 16px; 
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1); 
+        }
+        .footer-logo {
+            width: 50px; 
+            margin-right: 10px; 
+            vertical-align: middle; 
+        }
+    </style>
+</head>
+<body>
+    <div class="tint">
+        <header>
+            <img src="Asos-Logo.jpg" alt="Your Logo" class="logo">
+            <span>Influencer Marketing</span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </header>
+        <div class="search-container">
+            <div class="big-text">What type of influencer are you looking for?</div>
+            <form action="results-page.html" method="get">
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="" disabled selected>Select category</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="fitness">Fitness</option>
+                    <option value="beauty">Beauty</option>
+                </select>
+                <label for="engagement">What is your intended engagement rate?</label>
+                <input type="number" id="engagement" name="engagement" min="0" max="100" placeholder="0 to 100%" step="1" required>
+                <label>Target audience alignment:</label>
+                <div class="radio-group">
+                    <input type="radio" id="alignment_yes" name="alignment" value="yes" required><label for="alignment_yes">Yes</label>
+                    <input type="radio" id="alignment_no" name="alignment" value="no" required><label for="alignment_no">No</label>
+                </div>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+<footer>
+    <img src="Asos-Logo.jpg" alt="ASOS Marketing Logo" class="footer-logo">
+    Influencer Marketing 2024  &#169; All Rights Reserved
+</footer>
+</body>
+</html>
