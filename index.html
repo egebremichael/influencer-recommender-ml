@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aesthetic Marketing Homepage</title>
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background-size: cover;
+                font-family: Arial, sans-serif;
+                display: flex;
+                flex-direction: column;
+            }
+            .tint {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgb(0, 0, 0, 0.3); /* Dark tint */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            header {
+                background: #000;
+                color: white;
+                padding: 10px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: fixed; 
+                top: 0;
+                left: 0;
+                right: 0;
+            }
+            .logo {
+                height: 50px;
+                width: auto;
+                margin-right: 10px;
+            }
+            .slideshow {
+                position: auto;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: -1;
+                overflow: hidden;
+            }
+            .fade {
+                animation-name: fade;
+                animation-duration: 4s;
+            }
+            @keyframes fade {
+                from {opacity: .8} 
+                to {opacity: 1}
+            }
+            .content {
+                position: relative;
+                z-index: 1;
+                padding: 20px;
+                text-align: center;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 36px;
+                color: white;
+            }
+            .center-logo {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 60vh;
+            }
+            .center-logo img {
+                height: 100px;
+                width: auto;
+                margin-bottom: 20px;
+            }
+            .search-bar {
+                text-align: center;
+                margin-bottom: 50px;
+            }
+            input[type="text"], input[type="submit"], button {
+                width: 300px;
+                padding: 10px;
+                font-size: 16px;
+                border: none;
+                border-radius: 5px
+            }
+            input[type="submit"], button {
+                background-color: #444;
+                color: white;
+                cursor: pointer;
+                margin-bottom: 15px;
+            }
+            #search-button {
+                background-color: #444;
+                color: white;
+                cursor: pointer;
+                margin-bottom: 20px; 
+            }
+            #search-button:hover {
+                background-color: #000000; 
+            }
+            .recommendation-button {
+                background-color: #373737;
+                color: white;
+                cursor: pointer;
+                margin-top: 20px; 
+                margin-right: 20px;
+            }
+            .recommendation-button:hover {
+                background-color: #000000; 
+            }
+            footer {
+                background-color: #000000; 
+                color: white; 
+                text-align: center; 
+                padding: 20px 0px; 
+                position: relative; 
+                bottom: 0;
+                left: 0;
+                right: 0;
+                font-size: 16px; 
+                z-index: 10;
+                box-shadow: 0 -2px 5px rgba(0,0,0,0.1); 
+            }
+            .footer-logo {
+                width: 50px; 
+                margin-right: 10px; 
+                vertical-align: middle; 
+            }
+        </style>
+    </head>
+    <body>
+        <div class="slideshow">
+            <img class="fade" src="asos_beauty.png" style="width:100%; height: 100%; object-fit: cover;">
+            <img class="fade" src="asos_fashion.png" style="width:100%; height: 100%; object-fit: cover;">
+            <img class="fade" src="asos_fit.png" style="width:100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="tint">
+            <header>
+                <img src="Asos-Logo.jpg" alt="Your Logo" class="logo">
+                <span>Influencer Marketing</span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <button onclick="window.location.href='advanced-search.html'">Advanced Search</button>
+            </header>
+            <script>
+                let slideIndex = 0;
+                showSlides();
+
+                function showSlides() {
+                    let i;
+                    let slides = document.getElementsByClassName("fade");
+                    for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";  
+                    }
+                    slideIndex++;
+                    if (slideIndex > slides.length) {slideIndex = 1}    
+                    slides[slideIndex-1].style.display = "block";  
+                    setTimeout(showSlides, 5000); 
+                }
+
+                function handleButtonClick(category) {
+                    console.log("Button clicked for category:", category);
+
+                    // Fetch recommendations based on the category
+                    fetch(`http://127.0.0.1:5000/get_similarities?category=${encodeURIComponent(category)}`, {
+                        method: 'GET'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data); 
+                        window.location.href = 'target-page.html';  
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+                
+            </script>
+            <div class="center-logo">
+                <img src="825495.png" alt="Central Logo">
+                <div class="search-bar">
+                    <form action="target-page.html" method="get">
+                        <input type="text" placeholder="What would you like to advertise?">
+                        <input type="submit" id="search-button" value="Get Influencer Recommendations">
+                    </form>
+                    <button class="recommendation-button" onclick="handleButtonClick('fashion')">Fashion Influencer Recommendations</button>
+                    <button class="recommendation-button" onclick="handleButtonClick('fitness')">Fitness Influencer Recommendations</button>
+                    <button class="recommendation-button" onclick="handleButtonClick('beauty')">Beauty Influencer Recommendations</button>
+                </div>
+            </div>
+        </div>
+    <footer>
+        <img src="Asos-Logo.jpg" alt="ASOS Marketing Logo" class="footer-logo">
+        Influencer Marketing 2024  &#169; All Rights Reserved
+    </footer>
+    </body>
+</html>

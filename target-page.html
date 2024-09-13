@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Platypi' rel='stylesheet'>
+    <title>Top Influencer Recommendations</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: url('img2.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column; 
+        }
+        
+        .tint {
+            position: auto;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        header {
+            background: #000;
+            color: white;
+            padding: 10px 20px;
+            width: 100%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed; 
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .logo {
+            height: 50px;
+            width: auto;
+            margin-right: 1px;
+        }
+        .big-text {
+            font-size: 50px; 
+            font-weight: bold;
+            margin: 20px 0;
+            font-family: 'Platypi';
+            padding-top: 120px;
+                                                
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 40px;
+            padding: 20px;
+            padding-top: 90px;
+            max-width: 1200px; 
+            margin: auto;
+        }
+        .influencer {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            padding: 20px;
+            text-align: center; 
+            transition: transform 0.3s; 
+        }
+        .influencer:hover {
+            transform: translateY(-5px); 
+        }
+        .username {
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            display: block; 
+            margin-bottom: 10px;
+        }
+        .score {
+            color: #666; 
+            font-size: 16px; 
+        }
+        .instagram-logo {
+            width: 24px; 
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 20px 40px;
+            font-size: 20px;
+            color: #fff;
+            background-color: #3c3c3c;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+        }
+        footer {
+            background-color: #000000; 
+            color: white; 
+            text-align: center; 
+            padding: 20px 0px; 
+            position: fixed; 
+            bottom: 0;
+            left: 0;
+            right: 0;
+            font-size: 16px; 
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1); 
+        }
+        .footer-logo {
+            width: 50px;
+            margin-right: 10px; 
+            vertical-align: middle; 
+        }
+    </style>
+</head>
+<body>
+    <div class="tint">
+        <header>
+            <img src="Asos-Logo.jpg" alt="Your Logo" class="logo">
+            <span>Influencer Marketing</span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </header>
+        <div class="big-text">Recommended Influencers</div>
+        <div class="container" id="influencerContainer"></div>
+        <button id="showMoreBtn" onclick="loadMore()">Show More</button>
+        
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            let currentIndex = 0; 
+            const increment = 15;
+            let influencers = [];
+
+            $(document).ready(function() {
+                $.ajax({
+                    url: 'http://127.0.0.1:5000/get_similarities',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log("Data received:", response);
+                        influencers = response;
+                        loadMore(); 
+                        updateButtonVisibility();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching data:', error);
+                    }
+                });
+            });
+
+            function loadMore() {
+                const container = document.getElementById('influencerContainer');
+                const maxIndex = Math.min(currentIndex + increment, influencers.length);
+                for (let i = currentIndex; i < maxIndex; i++) {
+                    const inf = influencers[i];
+                    const div = document.createElement('div');
+                    div.className = 'influencer';
+                    div.innerHTML = `
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="instagram-logo">
+                        <a href="https://instagram.com/${inf.username}" class="username" target="_blank">${inf.username}</a>
+                        <div class="score">Score: ${inf.similarity_score.toFixed(2)}</div>
+                    `;
+                    container.appendChild(div);
+                }
+                currentIndex += increment; 
+                updateButtonVisibility();
+            }
+
+            function updateButtonVisibility() {
+                if (currentIndex >= influencers.length) {
+                    document.getElementById('showMoreBtn').style.display = 'none'; 
+                } else {
+                    document.getElementById('showMoreBtn').style.display = 'block'; 
+                }
+            }
+
+    </script>
+    </div>
+    <footer>
+        <img src="Asos-Logo.jpg" alt="ASOS Marketing Logo" class="footer-logo">
+        Influencer Marketing 2024  &#169; All Rights Reserved
+    </footer>
+    </body>
+</html>
